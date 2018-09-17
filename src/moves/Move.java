@@ -2,7 +2,6 @@ package moves;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import types.*;
 
 public class Move {
