@@ -2,7 +2,6 @@ package rpg;
 
 import java.util.Random;
 
-
 public class Dice {
 	private static int getRandomNumberInRange(int min, int max) {
 		Random r = new Random();
