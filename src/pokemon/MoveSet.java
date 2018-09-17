@@ -3,6 +3,7 @@ package pokemon;
 import java.util.ArrayList;
 import java.util.List;
 
+import moves.Modifiers;
 import moves.Move;
 import types.Type;
 
@@ -39,5 +40,18 @@ public class MoveSet {
 		}
 		
 		return count;
+	}
+	
+	public void addModifiersToMove(String name, Modifiers mod) {
+		if(this.basicMove.getName().equals(name)) {
+			this.basicMove.addModifier(mod);
+		}else {
+			for(int i = 0; i < tmMoves.size(); i++) {
+				if(tmMoves.get(i).getName().equals(name)) {
+					tmMoves.get(i).addModifier(mod);
+					break;
+				}
+			}
+		}
 	}
 }

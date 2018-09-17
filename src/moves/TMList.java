@@ -23,7 +23,8 @@ public class TMList {
 	}
 	
 	public static Move Fissure() {
-		Move fissure = new Move("fissure", 6, 4, -7, Move.PHYSICAL_ATTACK, Type.GROUND, false, new AcquireRestriction() {
+		String name = "fissure";
+		Move fissure = new Move(name, 6, 4, -7, Move.PHYSICAL_ATTACK, Type.GROUND, false, new AcquireRestriction() {
 			public boolean canAcquire(Pokemon p) {
 				return TypeInteractions.canLearnTypeMove(p, Type.GROUND);
 			}
@@ -32,7 +33,7 @@ public class TMList {
 		fissure.addEffect(new Effect(){
 			public void applyEffect(Pokemon attacking, Pokemon defending) {
 				if(defending.getType() != Type.GROUND) {
-					fissure.addModifier(Modifiers.damageModifier(-1, Modifiers.ONE_TURN_ONLY));
+					attacking.getMoveSet().addModifiersToMove(name, Modifiers.damageModifier(-1, Modifiers.ONE_TURN_ONLY));
 				}
 			}
 		});

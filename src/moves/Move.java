@@ -45,4 +45,8 @@ public class Move {
   public Type getType() {
   	return this.type;
   }
+  
+  public String getName() {
+  	return this.name;
+  }
 }
