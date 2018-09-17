@@ -3,5 +3,5 @@ package moves;
 import pokemon.*;
 
 public interface Effect {
-	void applyEffect(Pokemon attacking, Pokemon defending);
+  void applyEffect(Pokemon attacking, Pokemon defending);
 }

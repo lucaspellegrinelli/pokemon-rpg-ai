@@ -3,8 +3,8 @@ package pokemon;
 import types.Type;
 
 public class Pokemon {
-	private int maxHP;
-	private int baseAttack;
+  private int maxHP;
+  private int baseAttack;
 	private int baseDefense;
 	private int baseSpAttack;
 	private int baseSpDefense;
