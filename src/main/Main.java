@@ -1,20 +1,32 @@
 package main;
 
-import moves.BasicMoveList;
-import moves.Move;
-import moves.TMList;
-import pokemon.Pokemon;
-import types.Type;
+import model.field.Battlefield;
+import model.field.FieldModifier;
+import model.moves.BasicMoveList;
+import model.moves.Move;
+import model.moves.TMList;
+import model.pokemon.Pokemon;
+import model.pokemon.PokemonTeam;
+import model.types.Type;
 
 public class Main {
   public static void main(String[] args) {
+    Battlefield battlefield = new Battlefield();
+    battlefield.addModifier(FieldModifier.SANDSTORM);
+    
     Pokemon eevee = new Pokemon("eevee", 5, 2, 2, 2, 3, 2, Type.NORMAL);
-
     eevee.getMoveSet().addBasicMove(BasicMoveList.Tackle());
-    
     eevee.getMoveSet().addTMMove(TMList.Fissure());
-    eevee.getMoveSet().addTMMove(TMList.SomethingThatParalizes()); // Shouldn't add because rules
     
+    for(FieldModifier f : battlefield.getAllModifiers()) {
+      f.getFieldEffect().applyFieldEffect(eevee);
+    }
+    
+    eevee.applyStatusConditions();
+    eevee.removeAllStatsModifiers();
+    
+    System.out.println(eevee);
+
     printMoves(eevee);
   }
   

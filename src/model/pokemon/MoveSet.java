@@ -1,10 +1,10 @@
-package pokemon;
+package model.pokemon;
 
 import java.util.Vector;
 
-import moves.MoveModifiers;
-import moves.Move;
-import types.Type;
+import model.moves.Move;
+import model.moves.MoveModifiers;
+import model.types.Type;
 
 public class MoveSet {
   private final int MAX_TM_COUNT = 4;

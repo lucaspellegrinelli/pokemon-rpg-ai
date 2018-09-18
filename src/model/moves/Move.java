@@ -1,9 +1,9 @@
-package moves;
+package model.moves;
 
 import java.util.Vector;
 import java.util.function.Predicate;
 
-import types.*;
+import model.types.*;
 
 public class Move {
   public static final int PHYSICAL_ATTACK = 0;

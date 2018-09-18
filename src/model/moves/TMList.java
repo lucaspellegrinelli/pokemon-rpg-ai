@@ -1,12 +1,12 @@
-package moves;
+package model.moves;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import pokemon.Pokemon;
-import pokemon.status.StatusCondition;
-import types.Type;
-import types.TypeInteractions;
+import model.pokemon.Pokemon;
+import model.types.Type;
+import model.types.TypeInteractions;
+import modelpokemon.status.StatusCondition;
 
 public class TMList {
   List<Move> tms = new ArrayList<>();

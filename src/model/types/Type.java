@@ -1,4 +1,4 @@
-package types;
+package model.types;
 
 public enum Type{
   NORMAL,

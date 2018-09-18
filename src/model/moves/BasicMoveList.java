@@ -1,11 +1,11 @@
-package moves;
+package model.moves;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import pokemon.Pokemon;
-import types.Type;
-import types.TypeInteractions;
+import model.pokemon.Pokemon;
+import model.types.Type;
+import model.types.TypeInteractions;
 
 public class BasicMoveList {
   List<Move> basicMoves = new ArrayList<>();

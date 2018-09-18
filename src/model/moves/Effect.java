@@ -1,6 +1,6 @@
-package moves;
+package model.moves;
 
-import pokemon.*;
+import model.pokemon.*;
 
 public interface Effect {
   void applyEffect(Pokemon attacking, Pokemon defending);

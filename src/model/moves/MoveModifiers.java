@@ -1,4 +1,4 @@
-package moves;
+package model.moves;
 
 public class MoveModifiers {
   private final int NUMBER_OF_MODIFIERS = 3;

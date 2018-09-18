@@ -1,6 +1,6 @@
-package moves;
+package model.moves;
 
-import pokemon.Pokemon;
+import model.pokemon.Pokemon;
 
 public interface AcquireRestriction {
   boolean canAcquire(Pokemon p);

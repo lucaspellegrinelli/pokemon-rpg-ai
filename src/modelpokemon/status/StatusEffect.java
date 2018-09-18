@@ -1,6 +1,6 @@
-package pokemon.status;
+package modelpokemon.status;
 
-import pokemon.Pokemon;
+import model.pokemon.Pokemon;
 
 public interface StatusEffect {
   void applyStatus(Pokemon pokemon);

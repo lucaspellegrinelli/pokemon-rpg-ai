@@ -1,6 +1,7 @@
-package pokemon.status;
+package modelpokemon.status;
 
-import pokemon.Pokemon;
+import model.pokemon.Pokemon;
+import model.types.Type;
 import rpg.Dice;
 
 public class StatusCondition {
@@ -8,17 +9,17 @@ public class StatusCondition {
   private int turnsLeft;
   private StatusEffect effect;
   
-  private static int INFINITE_TIME = Integer.MAX_VALUE;
+  public static int INFINITE_TIME = Integer.MAX_VALUE;
   
   public static StatusCondition BURN = new StatusCondition("burn", INFINITE_TIME, new StatusEffect() {
     public void applyStatus(Pokemon pokemon) {
       int d6 = Dice.d6();
       
       if(d6 == 1) {
-        pokemon.removeHP(1);
-        pokemon.removeAttack(-2);
+        pokemon.addHP(-1);
+        pokemon.addAttack(-2);
       }else if(d6 >= 2 && d6 <= 5) {
-        pokemon.removeAttack(-2);
+        pokemon.addAttack(-2);
       }else {
         pokemon.removeSpecificStatusCondition("paralize");
       }
@@ -44,9 +45,9 @@ public class StatusCondition {
       
       if(d6 == 1) {
         pokemon.setAbleToAttack(false);
-        pokemon.removeSpeed(-2);
+        pokemon.addSpeed(-2);
       }else if(d6 >= 2 && d6 <= 4) {
-        pokemon.removeSpeed(-2);
+        pokemon.addSpeed(-2);
       }else {
         pokemon.removeSpecificStatusCondition("paralize");
       }
@@ -59,7 +60,7 @@ public class StatusCondition {
       
       if(d6 == 1 || d6 == 2) {
         pokemon.setAbleToAttack(false);
-        pokemon.removeHP(1);
+        pokemon.addHP(-1);
       }else if(d6 == 3 || d6 == 4) {
         // Nothing
       }else {
@@ -71,13 +72,41 @@ public class StatusCondition {
   public static StatusCondition FREEZE = new StatusCondition("freeze", 4, new StatusEffect() {
     public void applyStatus(Pokemon pokemon) {
       if(pokemon.getCurrentSpeed() <= 3) {
-        pokemon.removeAttack(1);
-        pokemon.removeDefense(1);
-        pokemon.removeSpAttack(1);
-        pokemon.removeSpDefense(1);
-        pokemon.removeSpeed(3);
+        pokemon.addAttack(-1);
+        pokemon.addDefense(-1);
+        pokemon.addSpAttack(-1);
+        pokemon.addSpDefense(-1);
+        pokemon.addSpeed(-3);
       }else {
-        pokemon.removeSpeed(3);
+        pokemon.addSpeed(-3);
+      }
+    }
+  });
+  
+  public static String[] CLIMATE_NAMES = {"sunny", "rainy", "sandstorm"};
+  
+  public static StatusCondition SUNNY_CLIMATE = new StatusCondition("sunny", 1, new StatusEffect() {
+    public void applyStatus(Pokemon pokemon) {
+      if(pokemon.getType() == Type.FIRE || pokemon.getType() == Type.GRASS) pokemon.addAttack(1);
+      else if(pokemon.getType() == Type.WATER) pokemon.addAttack(-1);
+    }
+  });
+  
+  public static StatusCondition RAINY_CLIMATE = new StatusCondition("rainy", 1, new StatusEffect() {
+    public void applyStatus(Pokemon pokemon) {
+      if(pokemon.getType() == Type.WATER || pokemon.getType() == Type.ELETRIC) pokemon.addAttack(1);
+      else if(pokemon.getType() == Type.FIRE) pokemon.addAttack(-1);
+    }
+  });
+  
+  public static StatusCondition SANDSTORM_CLIMATE = new StatusCondition("sandstorm", 1, new StatusEffect() {
+    public void applyStatus(Pokemon pokemon) {
+      if(pokemon.getType() != Type.ROCK && pokemon.getType() != Type.GROUND &&
+          pokemon.getType() != Type.STEEL && pokemon.getType() != Type.PSYCHIC) {
+        pokemon.addAttack(-2);
+        pokemon.addDefense(-2);
+      }else if(pokemon.getType() == Type.ROCK) {
+        pokemon.addSpDefense(1);
       }
     }
   });

@@ -1,11 +1,11 @@
-package pokemon;
+package model.pokemon;
 
 import java.util.Vector;
 import java.util.function.Predicate;
 
-import moves.Move;
-import pokemon.status.StatusCondition;
-import types.Type;
+import model.moves.Move;
+import model.types.Type;
+import modelpokemon.status.StatusCondition;
 
 public class Pokemon {
   private String name;
@@ -51,7 +51,7 @@ public class Pokemon {
     this.currentSpAttack = spa;
     
     this.baseSpDefense = sde;
-    this.currentDefense = sde;
+    this.currentSpDefense = sde;
     
     this.baseSpeed = spd;
     this.currentSpeed = spd;
@@ -128,48 +128,48 @@ public class Pokemon {
     return this.baseSpeed;
   }
   
-  public void removeHP(int howMuch) {
-    this.currentHP -= Math.min(howMuch, this.currentHP);
+  public void addHP(int howMuch) {
+    this.currentHP = Math.max(0, this.currentHP + howMuch);
   }
   
   public int getCurrentHP() {
     return this.currentHP;
   }
   
-  public void removeAttack(int howMuch) {
-    this.currentAttack -= Math.min(howMuch, this.currentAttack);
+  public void addAttack(int howMuch) {
+    this.currentAttack = Math.max(0, this.currentAttack + howMuch);
   }
 
   public int getCurrentAttack() {
     return this.currentAttack;
   }
   
-  public void removeDefense(int howMuch) {
-    this.currentDefense -= Math.min(howMuch, this.currentDefense);
+  public void addDefense(int howMuch) {
+    this.currentDefense = Math.max(0, this.currentDefense + howMuch);
   }
   
   public int getCurrentDefense() {
     return this.currentDefense;
   }
   
-  public void removeSpAttack(int howMuch) {
-    this.currentSpAttack -= Math.min(howMuch, this.currentSpAttack);
+  public void addSpAttack(int howMuch) {
+    this.currentSpAttack = Math.max(0, this.currentSpAttack + howMuch);
   }
   
   public int getCurrentSpAttack() {
     return this.currentSpAttack;
   }
   
-  public void removeSpDefense(int howMuch) {
-    this.currentSpDefense -= Math.min(howMuch, this.currentSpDefense);
+  public void addSpDefense(int howMuch) {
+    this.currentSpDefense = Math.max(0, this.currentSpDefense + howMuch);
   }
   
   public int getCurrentSpDefense() {
     return this.currentSpDefense;
   }
   
-  public void removeSpeed(int howMuch) {
-    this.currentSpeed -= Math.min(howMuch, this.currentSpeed);
+  public void addSpeed(int howMuch) {
+    this.currentSpeed = Math.max(0, this.currentSpeed + howMuch);
   }
   
   public int getCurrentSpeed() {
@@ -206,5 +206,24 @@ public class Pokemon {
   
   public Vector<StatusCondition> getStatusConditions(){
     return this.statusConditions;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if(obj == null) return false;
+    if(!(obj instanceof Pokemon)) return false;
+    
+    Pokemon p = (Pokemon)obj;
+    return p.getName().equals(this.name);
+  }
+  
+  @Override
+  public String toString() {
+    return "Name:\t\t" + this.name + "\n" +
+           "Attack:\t\t" + this.currentAttack + "\n" +
+           "Defense:\t" + this.currentDefense + "\n" +
+           "Sp Attack:\t" + this.currentSpAttack + "\n" +
+           "Sp Defense:\t" + this.currentSpDefense + "\n" +
+           "Speed:\t\t" + this.currentSpeed + "\n";
   }
 }

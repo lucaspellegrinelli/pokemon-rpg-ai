@@ -1,6 +1,6 @@
-package types;
+package model.types;
 
-import pokemon.Pokemon;
+import model.pokemon.Pokemon;
 
 public class TypeInteractions {
   public static final int NO_EFFECT = 0;
