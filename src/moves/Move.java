@@ -64,6 +64,10 @@ public class Move {
     return this.name;
   }
   
+  public AcquireRestriction getAcquireRestriction() {
+    return this.acqRestriction;
+  }
+  
   public void applyModifiers() {
     for(int i = 0; i < this.modifiers.size(); i++) {
       if(this.modifiers.get(i).areAllModifiersOver()) continue;

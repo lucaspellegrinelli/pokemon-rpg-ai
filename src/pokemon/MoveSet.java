@@ -1,7 +1,6 @@
 package pokemon;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 import moves.MoveModifiers;
 import moves.Move;
@@ -10,27 +9,33 @@ import types.Type;
 public class MoveSet {
   private final int MAX_TM_COUNT = 4;
   
-  private Move basicMove;
-  private List<Move> tmMoves = new ArrayList<>();
+  private Pokemon host;
+  private Vector<Move> basicMoves = new Vector<>();
+  private Vector<Move> tmMoves = new Vector<>();
   
-  public MoveSet(Move basicMove) {
-    this.basicMove = basicMove;
+  public MoveSet(Pokemon host) {
+    this.host = host;
   }
   
-  public List<Move> getTMs(){
+  public Vector<Move> getTMs(){
     return this.tmMoves;
   }
   
-  public Move getBasicMove() {
-    return this.basicMove;
+  public Vector<Move> getBasicMoves() {
+    return this.basicMoves;
   }
   
   public int getNumberOfTMs() {
     return tmMoves.size();
   }
   
-  public void addMove(Move m) {
-    if(tmMoves.size() < MAX_TM_COUNT) tmMoves.add(m);
+  public void addTMMove(Move m) {
+    int nTMs = Math.min(MAX_TM_COUNT, host.getBaseSpeed());
+    if(tmMoves.size() < nTMs && m.getAcquireRestriction().canAcquire(this.host)) tmMoves.add(m);
+  }
+  
+  public void addBasicMove(Move m) {
+    if(m.getAcquireRestriction().canAcquire(this.host)) basicMoves.add(m);
   }
   
   public int countMovesOfType(Type type) {
@@ -43,14 +48,17 @@ public class MoveSet {
   }
   
   public void addModifiersToMove(String name, MoveModifiers mod) {
-    if(this.basicMove.getName().equals(name)) {
-      this.basicMove.addModifier(mod);
-    }else {
-      for(int i = 0; i < tmMoves.size(); i++) {
-        if(tmMoves.get(i).getName().equals(name)) {
-          tmMoves.get(i).addModifier(mod);
-          break;
-        }
+    for(int i = 0; i < basicMoves.size(); i++) {
+      if(basicMoves.get(i).getName().equals(name)) {
+        basicMoves.get(i).addModifier(mod);
+        return;
+      }
+    }
+    
+    for(int i = 0; i < tmMoves.size(); i++) {
+      if(tmMoves.get(i).getName().equals(name)) {
+        tmMoves.get(i).addModifier(mod);
+        return;
       }
     }
   }

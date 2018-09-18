@@ -27,7 +27,7 @@ public class TMList {
     String name = "paralize_test";
     Move m = new Move(name, 0, 1, +10, Move.SPECIAL_ATTACK, Type.ELETRIC, false, new AcquireRestriction() {
       public boolean canAcquire(Pokemon p) {
-        return true;
+        return TypeInteractions.canLearnTypeMove(p, Type.ELETRIC);
       }
     });
     

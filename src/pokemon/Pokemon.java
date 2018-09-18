@@ -3,10 +3,13 @@ package pokemon;
 import java.util.Vector;
 import java.util.function.Predicate;
 
+import moves.Move;
 import pokemon.status.StatusCondition;
 import types.Type;
 
 public class Pokemon {
+  private String name;
+  
   private int baseHP;
   private int currentHP;
   
@@ -32,7 +35,9 @@ public class Pokemon {
   private MoveSet moveSet;
   private Vector<StatusCondition> statusConditions = new Vector<>();
   
-  public Pokemon(int hp, int atk, int def, int spa, int sde, int spd, Type type) {
+  public Pokemon(String name, int hp, int atk, int def, int spa, int sde, int spd, Type type) {
+    this.name = name.toLowerCase();
+    
     this.baseHP = hp;
     this.currentHP = hp;
     
@@ -55,6 +60,8 @@ public class Pokemon {
     
     this.ableToAttack = true;
     this.ableToDefend = true;
+    
+    this.moveSet = new MoveSet(this);
   }
   
   public void applyStatusConditions() {
@@ -91,6 +98,10 @@ public class Pokemon {
     this.currentSpeed = this.baseSpeed;
     this.ableToAttack = true;
     this.ableToDefend = true;
+  }
+  
+  public String getName() {
+    return this.name;
   }
 
   public int getBaseHP() {

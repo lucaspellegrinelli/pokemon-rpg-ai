@@ -8,9 +8,9 @@ public class TypeInteractions {
   public static final int NORMAL = 2;
   public static final int SUPER_EFFECTIVE = 2;
   
-  public static boolean canLearnTypeMove(Pokemon pokemon, Type move) {
+  public static boolean canLearnTypeMove(Pokemon pokemon, Type move) {    
     if(pokemon.getType() == Type.NORMAL) {
-      return pokemon.getMoveSet().countMovesOfType(move) == 0;
+      return pokemon.getMoveSet().countMovesOfType(Type.NORMAL) == pokemon.getMoveSet().getNumberOfTMs();
     }
     
     if(pokemon.getType() == Type.STEEL) {
